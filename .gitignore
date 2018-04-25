@@ -2,7 +2,7 @@ configs_binance
 configs_bittrex
 template_binance.js
 template_bittrex.js
-settings.json
+settings.js
 build
 dist
 __pycache__

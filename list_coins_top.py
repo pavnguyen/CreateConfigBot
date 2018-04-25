@@ -3,7 +3,7 @@ from binance import Client
 import operator, json, math
 
 def read_config(exchange, param):
-    with open('settings.json', 'r') as f:
+    with open('settings.js', 'r') as f:
         data = json.load(f)
     result = data[exchange][param]
     f.close()
@@ -36,7 +36,7 @@ def list_coins_binance(key, secret, type):
             data[tableaux[i]['symbol']] = tableaux[i]['quoteVolume']
             
     sorted_data = sorted(data.items(), key=operator.itemgetter(1), reverse=True)
-    for i in range(int(read_config('bittrex', 'first_position')), int(read_config('bittrex', 'last_position'))):
+    for i in range(int(read_config('binance', 'first_position')), int(read_config('binance', 'last_position'))):
         #print(sorted_data[i][0][4:] + '-----' + str(sorted_data[i][1]))
         contents.append(sorted_data[i][0][:-3])
 
@@ -48,7 +48,7 @@ def list_coins_binance(key, secret, type):
     for result in results:
         all_contents += result + '\n'
 
-    with open('Choices_Binance.txt', 'w', encoding='utf8') as f:
+    with open('Choices_binance.txt', 'w', encoding='utf8') as f:
         f.write(all_contents)
     f.close()
 
@@ -95,7 +95,7 @@ def list_coins_bittrex(key, secret, type):
     for result in results:
         all_contents += result + '\n'
 
-    with open('Choices_Bittrex.txt', 'w', encoding='utf8') as f:
+    with open('Choices_bittrex.txt', 'w', encoding='utf8') as f:
         f.write(all_contents)
     f.close()
 
@@ -121,7 +121,8 @@ def create_file_config(type):
         pairs_per_file = math.ceil(len(pairs)/number_bot)
         begin = 0
         all_contents = ''
-
+        content = ''
+        strategies = ''
         for i in range(1, number_bot + 1):
             with open('template_' + exchange + '.js', 'r') as f:
                 data = json.load(f)
@@ -129,9 +130,10 @@ def create_file_config(type):
             for j in range(begin, begin + int(pairs_per_file)):
                 try:
                     print(str(j+1) + '-' * 23 + '\n' + ' '*3 + exchange.capitalize() + ' > ' + pairs[j])
-                    
+                    strategies = read_config(exchange, 'strategies')
+                    #print(strategies)
                     data['pairs'][exchange][pairs[j]] = { 
-                                                        "strategy": "bbtssl", 
+                                                        "strategy": strategies, 
                                                         "override": {}      
                                     }
                     data['ws']['port'] = port + i
@@ -159,6 +161,6 @@ def create_file_config(type):
 
 if __name__ == "__main__":
 
-    list_coins_bittrex(read_config('bittrex', 'key'), read_config('bittrex', 'secret'), read_config('bittrex', 'type'))
+    #list_coins_bittrex(read_config('bittrex', 'key'), read_config('bittrex', 'secret'), read_config('bittrex', 'type'))
     
     list_coins_binance(read_config('binance', 'key'), read_config('binance', 'secret'), read_config('binance', 'type'))
