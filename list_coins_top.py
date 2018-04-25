@@ -121,7 +121,9 @@ def create_file_config(type):
         pairs_per_file = math.ceil(len(pairs)/number_bot)
         begin = 0
         all_contents = ''
+        all_contents_linux = ''
         content = ''
+        content_linux = ''
         strategies = ''
         for i in range(1, number_bot + 1):
             with open('template_' + exchange + '.js', 'r') as f:
@@ -146,9 +148,11 @@ def create_file_config(type):
 
                 #Create Batch file for each bot
                 content = 'start gunthy.exe --config=configs_' + exchange + '/config' + str(i) + '_' + exchange + '.js'
+                content_linux = './gunthy-linx64 --config=configs_' + exchange + '/config' + str(i) + '_' + exchange + '.js'
 
             begin = begin + pairs_per_file
             all_contents += content + "\ntimeout 5\n"
+            all_contents_linux += content_linux + " & \n"            
             if pairs_per_file * i > len(pairs):
                 break
             
@@ -156,6 +160,11 @@ def create_file_config(type):
         with open('0_RunALL_GB' + '_' + exchange + '.bat', 'w', encoding='utf8') as f:
             f.write(all_contents)
         f.close()
+
+        #Create Run file for LINUX
+        with open('0_Linux_GB' + '_' + exchange, 'w', encoding='utf8') as f:
+            f.write(all_contents_linux)
+        f.close()        
 
     
 
