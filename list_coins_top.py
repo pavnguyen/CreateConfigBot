@@ -114,17 +114,19 @@ def create_file_config(type):
         if exchange == 'binance':
             port = 5000
         elif exchange == 'bittrex':
-            port = 5010
+            port = 6000
 
         number_bot = read_config(exchange, 'number_bot')
 
         pairs_per_file = math.ceil(len(pairs)/number_bot)
+        
         begin = 0
-        all_contents = ''
-        all_contents_linux = ''
         content = ''
         content_linux = ''
+        all_contents = ''
+        all_contents_linux = ''
         strategies = ''
+
         for i in range(1, number_bot + 1):
             with open('template_' + exchange + '.js', 'r') as f:
                 data = json.load(f)
