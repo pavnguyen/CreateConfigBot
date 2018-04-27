@@ -2,12 +2,18 @@ from bittrex import bittrex
 from binance import Client
 import operator, json, math
 
-def read_config(exchange, param):
-    with open('settings.js', 'r') as f:
-        data = json.load(f)
-    result = data[exchange][param]
-    f.close()
-    return result
+def read_config(exchange, param, template=0):
+    if template == 0:
+        with open('settings.js', 'r') as f:
+            data = json.load(f)
+        result = data[exchange][param]
+        f.close()
+    else:
+        with open('template_' + exchange + '.js', 'r') as f:
+            data = json.load(f)
+        result = data['exchanges'][exchange][param]
+        f.close()
+    return result        
 
 def list_coins_binance(key, secret, type):
     
@@ -172,6 +178,6 @@ def create_file_config(type):
 
 if __name__ == "__main__":
 
-    #list_coins_bittrex(read_config('bittrex', 'key'), read_config('bittrex', 'secret'), read_config('bittrex', 'type'))
+    #list_coins_bittrex(read_config('bittrex', 'key', 1), read_config('bittrex', 'secret', 1), read_config('bittrex', 'type'))
     
-    list_coins_binance(read_config('binance', 'key'), read_config('binance', 'secret'), read_config('binance', 'type'))
+    list_coins_binance(read_config('binance', 'key', 1), read_config('binance', 'secret', 1), read_config('binance', 'type'))
