@@ -1,6 +1,6 @@
 from bittrex import bittrex
 from binance import Client
-import operator,json, math
+import operator,json, math, os
 
 def read_config(exchange, param, template=0):
     if template == 0:
@@ -203,6 +203,11 @@ def create_file_config(type):
     
 
 if __name__ == "__main__":
+
+    if not os.path.exists('configs_binance'):
+        os.makedirs('configs_binance')
+    if not os.path.exists('configs_bittrex'):
+        os.makedirs('configs_bittrex')
 
     list_coins_bittrex(read_config('bittrex', 'key', 1), read_config('bittrex', 'secret', 1), read_config('bittrex', 'type'))
     
