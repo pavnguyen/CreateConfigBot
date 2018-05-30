@@ -1,5 +1,5 @@
- & 
- & 
- & 
- & 
- & 
+./gunthy-linx64 --config=configs_bittrex/config1_bittrex.js & 
+./gunthy-linx64 --config=configs_bittrex/config2_bittrex.js & 
+./gunthy-linx64 --config=configs_bittrex/config3_bittrex.js & 
+./gunthy-linx64 --config=configs_bittrex/config4_bittrex.js & 
+./gunthy-linx64 --config=configs_bittrex/config5_bittrex.js & 

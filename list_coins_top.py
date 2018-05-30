@@ -1,6 +1,6 @@
 from bittrex import bittrex
 from binance import Client
-import operator, json, math
+import operator,json, math
 
 def read_config(exchange, param, template=0):
     if template == 0:
@@ -30,27 +30,38 @@ def list_coins_binance(key, secret, type):
     # Check coins availables with balances > 0.0
     #####
     for i in range(0, len(balances)):
-        if float(balances['balances'][i]['free']) > 0.00000000:
+        if float(balances['balances'][i]['free']) > 0.001 \
+            and balances['balances'][i]['asset'] != 'BNB' \
+            and balances['balances'][i]['asset'] != 'BTC':
             balance_coins.append(balances['balances'][i]['asset'])
-
+    print('\n-----------------------Binance-------------------- \n')        
+    print('... Bags Holder ... \n')
+    print(balance_coins)
     ###
     # Construct list of coins to trade with volume criteria
     ###
     for i in range(0, len(tableaux)):
 
-        if type in tableaux[i]['symbol'] and 'USD' not in tableaux[i]['symbol']:
-            data[tableaux[i]['symbol']] = tableaux[i]['quoteVolume']
-            
-    sorted_data = sorted(data.items(), key=operator.itemgetter(1), reverse=True)
-    for i in range(int(read_config('binance', 'first_position')), int(read_config('binance', 'last_position'))):
-        #print(sorted_data[i][0][4:] + '-----' + str(sorted_data[i][1]))
-        contents.append(sorted_data[i][0][:-3])
+        if type in tableaux[i]['symbol'] and 'USDT' not in tableaux[i]['symbol']:
+            #print(tableaux[i]['symbol'] + '------' +tableaux[i]['quoteVolume'])
+            data[tableaux[i]['symbol']] = float(tableaux[i]['quoteVolume'])
+            sorted_data = sorted(data.items(), key=operator.itemgetter(1), reverse=True)
 
-    s_c_coins = set(contents)  
-    s_b_coins = set(balance_coins)
- 
-    results = sorted(s_c_coins|s_b_coins) #union
+    for i in range(int(read_config('binance', 'first_position')) -1, int(read_config('binance', 'last_position'))):
+        #print(sorted_data[i][0][:-3] + '-----' + str(sorted_data[i][1]))
+        contents.append(sorted_data[i][0][:-3])
+    results = contents
+    print('------------- Coins top ------------- \n')
+    print(results)
     all_contents =''
+
+    for result in balance_coins:
+        all_contents += result + '\n'
+
+    with open('bags_binance.txt', 'w', encoding='utf8') as f:
+        f.write(all_contents)
+    f.close()
+
     for result in results:
         all_contents += result + '\n'
 
@@ -75,29 +86,44 @@ def list_coins_bittrex(key, secret, type):
     # Check coins availables with balances > 0.0
     #####
     for i in range(0, len(balances)):
-        if float(balances[i]['Available']) > 0.0:
+        if float(balances[i]['Available']) > 0.001 \
+            and balances[i]['Currency'] != 'BTC':
             balance_coins.append(balances[i]['Currency'])
-
+    print('----------------------Bittrex---------------------\n')        
+    print('... Bags Holder... \n')
+    print(balance_coins)
     ###
     # Construct list of coins to trade with volume criteria
     ###
     for i in range(0, len(tableaux)):
 
-        if type in tableaux[i]['MarketName'] and 'USD' not in tableaux[i]['MarketName']:
+        if type in tableaux[i]['MarketName'] and 'USDT' not in tableaux[i]['MarketName']:
             data[tableaux[i]['MarketName']] = tableaux[i]['BaseVolume']
             
     sorted_data = sorted(data.items(), key=operator.itemgetter(1), reverse=True)
     #print(sorted_data)
 
-    for i in range(int(read_config('bittrex', 'first_position')), int(read_config('bittrex', 'last_position'))):
+    for i in range(int(read_config('bittrex', 'first_position')) -1, int(read_config('bittrex', 'last_position'))):
         #print(sorted_data[i][0][4:] + '-----' + str(sorted_data[i][1]))
         contents.append(sorted_data[i][0][4:])
 
-    s_c_coins = set(contents)    
-    s_b_coins = set(balance_coins)
-    results = sorted(s_c_coins|s_b_coins) #union
+    #s_c_coins = set(contents)    
+    #s_b_coins = set(balance_coins)
+    #results = sorted(s_c_coins|s_b_coins) #union
+
+    results = contents
+    print('------------- Coins top ------------- \n')
+    print(results)
 
     all_contents =''
+
+    for result in balance_coins:
+        all_contents += result + '\n'
+
+    with open('bags_bittrex.txt', 'w', encoding='utf8') as f:
+        f.write(all_contents)
+    f.close()
+
     for result in results:
         all_contents += result + '\n'
 
@@ -113,7 +139,7 @@ def create_file_config(type):
         pairs = []
         with open('Choices_' + exchange + '.txt') as f:
             pairs = [ type + '-' + line.strip() for line in f]
-            pairs.sort()
+            #pairs.sort()
         f.close()
 
         # CHANGE CONFIG HERE!!! binance | bittrex
@@ -139,7 +165,7 @@ def create_file_config(type):
             f.close()
             for j in range(begin, begin + int(pairs_per_file)):
                 try:
-                    print(str(j+1) + '-' * 23 + '\n' + ' '*3 + exchange.capitalize() + ' > ' + pairs[j])
+                    #print(str(j+1) + '-' * 23 + '\n' + ' '*3 + exchange.capitalize() + ' > ' + pairs[j])
                     strategies = read_config(exchange, 'strategies')
                     #print(strategies)
                     data['pairs'][exchange][pairs[j]] = { 
@@ -178,6 +204,6 @@ def create_file_config(type):
 
 if __name__ == "__main__":
 
-    #list_coins_bittrex(read_config('bittrex', 'key', 1), read_config('bittrex', 'secret', 1), read_config('bittrex', 'type'))
+    list_coins_bittrex(read_config('bittrex', 'key', 1), read_config('bittrex', 'secret', 1), read_config('bittrex', 'type'))
     
     list_coins_binance(read_config('binance', 'key', 1), read_config('binance', 'secret', 1), read_config('binance', 'type'))
