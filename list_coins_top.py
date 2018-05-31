@@ -41,15 +41,19 @@ def list_coins_binance(key, secret, type):
     # Construct list of coins to trade with volume criteria
     ###
     for i in range(0, len(tableaux)):
-
-        if type in tableaux[i]['symbol'] and 'USDT' not in tableaux[i]['symbol']:
-            #print(tableaux[i]['symbol'] + '------' +tableaux[i]['quoteVolume'])
+        if type in tableaux[i]['symbol'][-4:]:
+            #print(tableaux[i]['symbol'][-4:] + '------' +tableaux[i]['quoteVolume'])
             data[tableaux[i]['symbol']] = float(tableaux[i]['quoteVolume'])
             sorted_data = sorted(data.items(), key=operator.itemgetter(1), reverse=True)
 
-    for i in range(int(read_config('binance', 'first_position')) -1, int(read_config('binance', 'last_position'))):
+    if int(read_config('binance', 'last_position')) > len(sorted_data):
+        total = len(sorted_data)
+    else:
+        total = int(read_config('binance', 'last_position'))
+
+    for i in range(int(read_config('binance', 'first_position')) -1, total):
         #print(sorted_data[i][0][:-3] + '-----' + str(sorted_data[i][1]))
-        contents.append(sorted_data[i][0][:-3])
+        contents.append(sorted_data[i][0][:-len(type)])
     results = contents
     print('------------- Coins top ------------- \n')
     print(results)
@@ -61,6 +65,8 @@ def list_coins_binance(key, secret, type):
     with open('bags_binance.txt', 'w', encoding='utf8') as f:
         f.write(all_contents)
     f.close()
+
+    all_contents = ''
 
     for result in results:
         all_contents += result + '\n'
@@ -97,15 +103,20 @@ def list_coins_bittrex(key, secret, type):
     ###
     for i in range(0, len(tableaux)):
 
-        if type in tableaux[i]['MarketName'] and 'USDT' not in tableaux[i]['MarketName']:
+        if type in tableaux[i]['MarketName'][0:4] :
+            #print(tableaux[i]['MarketName'])
             data[tableaux[i]['MarketName']] = tableaux[i]['BaseVolume']
             
     sorted_data = sorted(data.items(), key=operator.itemgetter(1), reverse=True)
     #print(sorted_data)
+    if int(read_config('binance', 'last_position')) > len(sorted_data):
+        total = len(sorted_data)
+    else:
+        total = int(read_config('binance', 'last_position'))
 
-    for i in range(int(read_config('bittrex', 'first_position')) -1, int(read_config('bittrex', 'last_position'))):
+    for i in range(int(read_config('bittrex', 'first_position')) -1, total):
         #print(sorted_data[i][0][4:] + '-----' + str(sorted_data[i][1]))
-        contents.append(sorted_data[i][0][4:])
+        contents.append(sorted_data[i][0][sorted_data[i][0].index('-')+1:])
 
     #s_c_coins = set(contents)    
     #s_b_coins = set(balance_coins)
@@ -124,6 +135,8 @@ def list_coins_bittrex(key, secret, type):
         f.write(all_contents)
     f.close()
 
+
+    all_contents = ''
     for result in results:
         all_contents += result + '\n'
 
