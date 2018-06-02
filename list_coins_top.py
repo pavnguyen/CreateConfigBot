@@ -109,10 +109,10 @@ def list_coins_bittrex(key, secret, type):
             
     sorted_data = sorted(data.items(), key=operator.itemgetter(1), reverse=True)
     #print(sorted_data)
-    if int(read_config('binance', 'last_position')) > len(sorted_data):
+    if int(read_config('bittrex', 'last_position')) > len(sorted_data):
         total = len(sorted_data)
     else:
-        total = int(read_config('binance', 'last_position'))
+        total = int(read_config('bittrex', 'last_position'))
 
     for i in range(int(read_config('bittrex', 'first_position')) -1, total):
         #print(sorted_data[i][0][4:] + '-----' + str(sorted_data[i][1]))
