@@ -103,7 +103,10 @@ def list_coins_bittrex(key, secret, type):
             price_buy = float ('%.8f' % balance_buy_price[0]['Limit'])
             pourcentage = (price_now - price_buy) / price_buy * 100
             pourcentage = float ('%.8f' % pourcentage)
-            print('%.2f' % pourcentage)
+            print(balance_coins[i] + '   ->   ' + 'Price Now: ' + str('%.8f' % price_now) \
+                                            + ' ### Price Buy: ' +  str('%.8f' % price_buy) \
+                                             + ' ### Pourcentage: ' +str('%.2f' % pourcentage))
+
             balance_coins[i] += '   ->   ' + 'Price Now: ' + str('%.8f' % price_now) \
                                             + ' ### Price Buy: ' +  str('%.8f' % price_buy) \
                                              + ' ### Pourcentage: ' +str('%.2f' % pourcentage)
