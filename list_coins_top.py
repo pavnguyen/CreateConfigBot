@@ -111,11 +111,11 @@ def list_coins_bittrex(key, secret, type):
             pourcentage = float ('%.8f' % pourcentage)
             print(balance_coins[i] + '   ->   ' + 'Price Now: ' + str('%.8f' % last_price) \
                                             + ' ### Price Buy: ' +  str('%.8f' % price_buy) \
-                                             + ' ### %: ' +str('%.2f' % pourcentage))
+                                             + ' ### Pourcentage: ' + str('%.2f' % pourcentage) + ' %')
 
             balance_coins[i] += '   ->   ' + 'Price Now: ' + str('%.8f' % last_price) \
                                             + ' ### Price Buy: ' +  str('%.8f' % price_buy) \
-                                             + ' ### Pource%ntage: ' +str('%.2f' % pourcentage)
+                                             + ' ### Pourcentage: ' + str('%.2f' % pourcentage + ' %')
         except:
             pass
         
