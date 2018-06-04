@@ -95,9 +95,25 @@ def list_coins_bittrex(key, secret, type):
         if float(balances[i]['Available']) > 0.001 \
             and balances[i]['Currency'] != 'BTC':
             balance_coins.append(balances[i]['Currency'])
+    #print(balance_coins)  
+    for i in range(0, len(balance_coins)):
+        try:
+            balance_buy_price = api.getorderhistory(type + '-' + balance_coins[i], 1)
+            price_now = float('%.8f' % balance_buy_price[0]['PricePerUnit'])
+            price_buy = float ('%.8f' % balance_buy_price[0]['Limit'])
+            pourcentage = (price_now - price_buy) / price_buy * 100
+            pourcentage = float ('%.8f' % pourcentage)
+            print('%.2f' % pourcentage)
+            balance_coins[i] += '   ->   ' + 'Price Now: ' + str('%.8f' % price_now) \
+                                            + ' ### Price Buy: ' +  str('%.8f' % price_buy) \
+                                             + ' ### Pourcentage: ' +str('%.2f' % pourcentage)
+        except:
+            pass
+        
+
     print('----------------------Bittrex---------------------\n')        
     print('... Bags Holder... \n')
-    print(balance_coins)
+
     ###
     # Construct list of coins to trade with volume criteria
     ###
