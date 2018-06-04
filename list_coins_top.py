@@ -96,6 +96,10 @@ def list_coins_bittrex(key, secret, type):
             and balances[i]['Currency'] != 'BTC':
             balance_coins.append(balances[i]['Currency'])
     #print(balance_coins)  
+
+    print('----------------------Bittrex---------------------\n')        
+    print('... Bags Holder... \n')
+        
     for i in range(0, len(balance_coins)):
         try:
             balance_buy_price = api.getorderhistory(type + '-' + balance_coins[i], 1)
@@ -113,9 +117,6 @@ def list_coins_bittrex(key, secret, type):
         except:
             pass
         
-
-    print('----------------------Bittrex---------------------\n')        
-    print('... Bags Holder... \n')
 
     ###
     # Construct list of coins to trade with volume criteria
