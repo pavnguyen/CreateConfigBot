@@ -1,26 +1,28 @@
-ADA   ->   Price Now: 0.00002884 ### Price Buy: 0.00002886 ### Pourcentage: -0.07
-BCC   ->   Price Now: 0.15027541 ### Price Buy: 0.15027600 ### Pourcentage: -0.00
-BTG   ->   Price Now: 0.00584882 ### Price Buy: 0.00584941 ### Pourcentage: -0.01
+ADA   ->   Price Now: 0.00002835 ### Price Buy: 0.00002886 ### Pourcentage: -1.77
+BCC   ->   Price Now: 0.14798000 ### Price Buy: 0.15027600 ### Pourcentage: -1.53
+BTG   ->   Price Now: 0.00584379 ### Price Buy: 0.00584941 ### Pourcentage: -0.10
 COVAL
-DCR   ->   Price Now: 0.01281679 ### Price Buy: 0.01281680 ### Pourcentage: -0.00
-EBST   ->   Price Now: 0.00002201 ### Price Buy: 0.00002202 ### Pourcentage: -0.05
-EDG   ->   Price Now: 0.00006688 ### Price Buy: 0.00006689 ### Pourcentage: -0.01
-ETC   ->   Price Now: 0.00205515 ### Price Buy: 0.00205522 ### Pourcentage: -0.00
-GRS   ->   Price Now: 0.00012923 ### Price Buy: 0.00012925 ### Pourcentage: -0.02
-LSK   ->   Price Now: 0.00121544 ### Price Buy: 0.00121546 ### Pourcentage: -0.00
-LTC   ->   Price Now: 0.01630994 ### Price Buy: 0.01631000 ### Pourcentage: -0.00
-MCO   ->   Price Now: 0.00093797 ### Price Buy: 0.00093798 ### Pourcentage: -0.00
-NEO   ->   Price Now: 0.00717999 ### Price Buy: 0.00718000 ### Pourcentage: -0.00
-NXS   ->   Price Now: 0.00033999 ### Price Buy: 0.00034000 ### Pourcentage: -0.00
+DCR   ->   Price Now: 0.01273400 ### Price Buy: 0.01281680 ### Pourcentage: -0.65
+EBST   ->   Price Now: 0.00002174 ### Price Buy: 0.00002202 ### Pourcentage: -1.27
+EDG   ->   Price Now: 0.00006668 ### Price Buy: 0.00006689 ### Pourcentage: -0.31
+ETC   ->   Price Now: 0.00203795 ### Price Buy: 0.00205522 ### Pourcentage: -0.84
+GRS   ->   Price Now: 0.00012967 ### Price Buy: 0.00012925 ### Pourcentage: 0.32
+LSK   ->   Price Now: 0.00120611 ### Price Buy: 0.00121546 ### Pourcentage: -0.77
+LTC   ->   Price Now: 0.01603088 ### Price Buy: 0.01631000 ### Pourcentage: -1.71
+MCO   ->   Price Now: 0.00091170 ### Price Buy: 0.00093798 ### Pourcentage: -2.80
+NEO   ->   Price Now: 0.00715996 ### Price Buy: 0.00718000 ### Pourcentage: -0.28
+NXS   ->   Price Now: 0.00033083 ### Price Buy: 0.00034000 ### Pourcentage: -2.70
+OCN   ->   Price Now: 0.00000231 ### Price Buy: 0.00000233 ### Pourcentage: -0.86
 OMNI
-PART   ->   Price Now: 0.00117034 ### Price Buy: 0.00117035 ### Pourcentage: -0.00
-POLY   ->   Price Now: 0.00009351 ### Price Buy: 0.00009352 ### Pourcentage: -0.01
+PART   ->   Price Now: 0.00114276 ### Price Buy: 0.00117035 ### Pourcentage: -2.36
+POLY   ->   Price Now: 0.00009288 ### Price Buy: 0.00009352 ### Pourcentage: -0.68
 PTC
-QTUM   ->   Price Now: 0.00183460 ### Price Buy: 0.00183461 ### Pourcentage: -0.00
-SALT   ->   Price Now: 0.00026589 ### Price Buy: 0.00026593 ### Pourcentage: -0.02
+QTUM   ->   Price Now: 0.00185441 ### Price Buy: 0.00183461 ### Pourcentage: 1.08
+SALT   ->   Price Now: 0.00026368 ### Price Buy: 0.00026593 ### Pourcentage: -0.85
 SIB
-VEE   ->   Price Now: 0.00000413 ### Price Buy: 0.00000414 ### Pourcentage: -0.24
-WAX   ->   Price Now: 0.00002659 ### Price Buy: 0.00002660 ### Pourcentage: -0.04
-XMR   ->   Price Now: 0.02185795 ### Price Buy: 0.02185800 ### Pourcentage: -0.00
-XRP   ->   Price Now: 0.00008833 ### Price Buy: 0.00008834 ### Pourcentage: -0.01
-ZRX   ->   Price Now: 0.00016979 ### Price Buy: 0.00016980 ### Pourcentage: -0.01
+VEE   ->   Price Now: 0.00000401 ### Price Buy: 0.00000401 ### Pourcentage: 0.00
+WAX   ->   Price Now: 0.00002530 ### Price Buy: 0.00002660 ### Pourcentage: -4.89
+XMR   ->   Price Now: 0.02140000 ### Price Buy: 0.02185800 ### Pourcentage: -2.10
+XRP   ->   Price Now: 0.00008654 ### Price Buy: 0.00008834 ### Pourcentage: -2.04
+XVG   ->   Price Now: 0.00000526 ### Price Buy: 0.00000528 ### Pourcentage: -0.38
+ZRX   ->   Price Now: 0.00016641 ### Price Buy: 0.00016980 ### Pourcentage: -2.00

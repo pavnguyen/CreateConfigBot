@@ -99,21 +99,23 @@ def list_coins_bittrex(key, secret, type):
 
     print('----------------------Bittrex---------------------\n')        
     print('... Bags Holder... \n')
-        
+
     for i in range(0, len(balance_coins)):
         try:
             balance_buy_price = api.getorderhistory(type + '-' + balance_coins[i], 1)
-            price_now = float('%.8f' % balance_buy_price[0]['PricePerUnit'])
+            getticker = api.getticker(type + '-' + balance_coins[i])
+            last_price = float('%.8f' % getticker['Last'])
+            #price_now = float('%.8f' % balance_buy_price[0]['PricePerUnit'])
             price_buy = float ('%.8f' % balance_buy_price[0]['Limit'])
-            pourcentage = (price_now - price_buy) / price_buy * 100
+            pourcentage = (last_price - price_buy) / price_buy * 100
             pourcentage = float ('%.8f' % pourcentage)
-            print(balance_coins[i] + '   ->   ' + 'Price Now: ' + str('%.8f' % price_now) \
+            print(balance_coins[i] + '   ->   ' + 'Price Now: ' + str('%.8f' % last_price) \
                                             + ' ### Price Buy: ' +  str('%.8f' % price_buy) \
-                                             + ' ### Pourcentage: ' +str('%.2f' % pourcentage))
+                                             + ' ### %: ' +str('%.2f' % pourcentage))
 
-            balance_coins[i] += '   ->   ' + 'Price Now: ' + str('%.8f' % price_now) \
+            balance_coins[i] += '   ->   ' + 'Price Now: ' + str('%.8f' % last_price) \
                                             + ' ### Price Buy: ' +  str('%.8f' % price_buy) \
-                                             + ' ### Pourcentage: ' +str('%.2f' % pourcentage)
+                                             + ' ### Pource%ntage: ' +str('%.2f' % pourcentage)
         except:
             pass
         
@@ -122,7 +124,6 @@ def list_coins_bittrex(key, secret, type):
     # Construct list of coins to trade with volume criteria
     ###
     for i in range(0, len(tableaux)):
-
         if type in tableaux[i]['MarketName'][0:4] :
             #print(tableaux[i]['MarketName'])
             data[tableaux[i]['MarketName']] = tableaux[i]['BaseVolume']
